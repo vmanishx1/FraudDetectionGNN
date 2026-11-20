@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fraud-detection-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./saved_models:/app/saved_models
+      - ./datasets:/app/datasets
+      - ./reports:/app/reports
+      - ./logs:/app/logs
+    environment:
+      - DATABASE_URL=sqlite:///./fraud_detection.db
+      - SECRET_KEY=fraud-detection-gnn-secure-key
+      - DEBUG=False
+      - EPOCHS=100
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - fraud-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fraud-detection-frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./saved_models:/app/saved_models
+      - ./reports:/app/reports
+      - ./logs:/app/logs
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+    command: streamlit run app/main.py --server.port 8501 --server.address 0.0.0.0
+    networks:
+      - fraud-network
+
+networks:
+  fraud-network:
+    driver: bridge

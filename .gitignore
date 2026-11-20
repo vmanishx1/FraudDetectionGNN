@@ -1,0 +1,81 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+.conda/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Model Files
+saved_models/
+*.pt
+*.pth
+*.pkl
+*.pickle
+
+# Dataset
+datasets/
+*.csv
+*.zip
+*.tar.gz
+*.parquet
+
+# Reports
+reports/*.pdf
+reports/*.html
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.env.local
+
+# Docker
+.docker/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# pytest
+.pytest_cache/
+.cache/
+
+# Streamlit
+.streamlit/
+
+# Temp
+temp/
+tmp/
+*.tmp
